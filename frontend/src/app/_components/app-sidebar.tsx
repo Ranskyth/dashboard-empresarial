@@ -10,8 +10,8 @@ import {
   IconUsers,
 } from "@tabler/icons-react"
 
-import { NavMain } from "@/components/nav-main"
-import { NavUser } from "@/components/nav-user"
+import { NavMain } from "@/app/_components/nav-main"
+import { NavUser } from "@/app/_components/nav-user"
 import {
   Sidebar,
   SidebarContent,
@@ -31,27 +31,27 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "#",
+      url: "/",
       icon: IconDashboard,
     },
     {
       title: "Produtos",
-      url: "#",
+      url: "/produtos",
       icon: IconListDetails,
     },
     {
       title: "Vendas",
-      url: "#",
+      url: "/vendas",
       icon: IconChartBar,
     },
     {
       title: "Clientes",
-      url: "#",
+      url: "/clientes",
       icon: IconFolder,
     },
     {
       title: "Relatórios",
-      url: "#",
+      url: "/relatorios",
       icon: IconUsers,
     },
   ],

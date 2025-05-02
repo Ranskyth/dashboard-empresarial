@@ -9,6 +9,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { useRouter } from "next/navigation"
 
 export function NavMain({
   items,
@@ -19,6 +20,7 @@ export function NavMain({
     icon?: Icon
   }[]
 }) {
+  const router = useRouter()
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
@@ -29,10 +31,12 @@ export function NavMain({
         <SidebarMenu>
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton tooltip={item.title}>
+              
+              <SidebarMenuButton onClick={() => router.push(item.url)} tooltip={item.title}>
                 {item.icon && <item.icon />}
                 <span>{item.title}</span>
               </SidebarMenuButton>
+
             </SidebarMenuItem>
           ))}
         </SidebarMenu>
