@@ -1,6 +1,10 @@
+import { TableDemo } from "@/app/_components/table-vendas"
+
 const Vendas = () => {
     return(
-        <h1>oiii</h1>
+        <div className="p-[25px]">
+            <TableDemo/>
+        </div>
     )
 }
 
