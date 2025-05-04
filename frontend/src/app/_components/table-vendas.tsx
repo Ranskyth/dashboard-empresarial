@@ -1,7 +1,6 @@
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableFooter,
     TableHead,
@@ -11,43 +10,43 @@ import {
   
   const invoices = [
     {
-      invoice: "INV001",
+      invoice: 1,
       paymentStatus: "Paid",
       totalAmount: "$250.00",
       paymentMethod: "Credit Card",
     },
     {
-      invoice: "INV002",
+      invoice: 2,
       paymentStatus: "Pending",
       totalAmount: "$150.00",
       paymentMethod: "PayPal",
     },
     {
-      invoice: "INV003",
+      invoice: 3,
       paymentStatus: "Unpaid",
       totalAmount: "$350.00",
       paymentMethod: "Bank Transfer",
     },
     {
-      invoice: "INV004",
+      invoice: 4,
       paymentStatus: "Paid",
       totalAmount: "$450.00",
       paymentMethod: "Credit Card",
     },
     {
-      invoice: "INV005",
+      invoice: 5,
       paymentStatus: "Paid",
       totalAmount: "$550.00",
       paymentMethod: "PayPal",
     },
     {
-      invoice: "INV006",
+      invoice: 6,
       paymentStatus: "Pending",
       totalAmount: "$200.00",
       paymentMethod: "Bank Transfer",
     },
     {
-      invoice: "INV007",
+      invoice: 7,
       paymentStatus: "Unpaid",
       totalAmount: "$300.00",
       paymentMethod: "Credit Card",

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { DialogComponent } from "@/app/_components/dialog"
 import { Button } from "@/components/ui/button"
 
