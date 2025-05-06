@@ -7,4 +7,4 @@ const app = fastify()
 app.register(productRouter)
 
 
-app.listen({port:Number(PORT)}, () => console.log(`server online in port ${PORT}`))
+app.listen({port:Number(PORT)}, () => console.log(`server on in port ${PORT}`))
