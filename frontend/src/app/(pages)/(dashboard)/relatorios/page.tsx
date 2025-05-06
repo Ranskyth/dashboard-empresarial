@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { DialogComponent } from "@/app/_components/dialog"
-import { Button } from "@/components/ui/button"
+"use client"
 
 const Relatorios = () => {
+    
     return(
         <h1>oii</h1>
     )

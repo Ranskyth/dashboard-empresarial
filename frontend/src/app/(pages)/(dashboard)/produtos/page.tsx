@@ -1,6 +1,6 @@
+"use client"
+
 import { DataTable } from "@/app/_components/data-table"
-
-
 
 const teste = [{
     id: 1,
@@ -52,6 +52,7 @@ const teste = [{
 ]
 
 const Produtos = () => {
+     
     return(
         <div className="mt-12">
             <DataTable data={teste}/>
