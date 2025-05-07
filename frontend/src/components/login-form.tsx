@@ -1,19 +1,35 @@
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
+
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useForm } from "react-hook-form";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const { register, handleSubmit } = useForm();
+
+  const handleSub = async (data: any) => {
+    fetch("http://localhost:3333/login", {
+      method: "POST",
+      body: JSON.stringify(data),
+      credentials: 'include',
+      headers: {
+        "Content-Type": "application/json",
+      }})
+  }
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
@@ -24,11 +40,12 @@ export function LoginForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form onSubmit={handleSubmit(handleSub)}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-3">
                 <Label htmlFor="email">Email</Label>
                 <Input
+                  {...register("email")}
                   id="email"
                   type="email"
                   placeholder="m@example.com"
@@ -45,7 +62,12 @@ export function LoginForm({
                     Forgot your password?
                   </a>
                 </div>
-                <Input id="password" type="password" required />
+                <Input
+                  {...register("password")}
+                  id="password"
+                  type="password"
+                  required
+                />
               </div>
               <div className="flex flex-col gap-3">
                 <Button type="submit" className="w-full">
@@ -66,5 +88,5 @@ export function LoginForm({
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
