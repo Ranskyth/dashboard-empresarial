@@ -1,4 +1,5 @@
 import { FastifyInstance} from "fastify";
+import { verifyJwt } from "../auth";
 
 export const loginRouter = (app: FastifyInstance) => {
     app.post("/login", (req, res) => {
@@ -16,5 +17,10 @@ export const loginRouter = (app: FastifyInstance) => {
         } else {
             return res.status(400).send({ mensagem: "error in login" })
         }
+    })
+
+    app.get("/logout", {preHandler: verifyJwt} ,(req, res) => {
+        return res.status(200).setCookie('token', 'none', {httpOnly: true, }).send({mensagem:"logout sucess"})
+        
     })
 }

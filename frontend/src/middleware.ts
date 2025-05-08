@@ -1,35 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { jwtVerify } from "jose"
-
-const publicRoutes = {
-  router: ["/login"]
-}
+import {jwtVerify} from 'jose';
 
 const secret = new TextEncoder().encode("secret")
 
-export async function middleware(request: NextRequest) {
-  const urlpath = request.nextUrl.pathname
-  const publicRouter = publicRoutes.router.find(x => x === urlpath)
-  const token = request.cookies.get('token')
+export async function middleware(req: NextRequest) {
 
-  if (!publicRouter && !token) {
-    const redirect = request.nextUrl.clone()
-    redirect.pathname = "/login"
-    return NextResponse.redirect(redirect)
+  const token = req.cookies.get('token')?.value
+  
+  if (token) {
+    try {
+      if(token.split(".").length === 3){
+        await jwtVerify(token, secret);
+        return NextResponse.next();
+      }else{
+        console.log("erro no formato do jwt")
+      }
+    } catch(error){
+      console.error("Erro ao verificar token:", error);
+      return NextResponse.redirect(new URL('/login', req.url));
+    }
   }
+  
 
-  try {
-    jwtVerify(String(token?.value), secret)
-    return NextResponse.next()
-  } catch (error) {
-    console.log("error : ", error)
-    return NextResponse.redirect(new URL('/login', request.url))
-  }
-
+  return NextResponse.redirect(new URL('/login', req.url));
 }
 
 export const config = {
-  matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)',
-  ],
-}
+  matcher: ['/dashboard/:path*'],
+};

@@ -31,27 +31,27 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "/",
+      url: "/dashboard",
       icon: IconDashboard,
     },
     {
       title: "Produtos",
-      url: "/produtos",
+      url: "/dashboard/produtos",
       icon: IconListDetails,
     },
     {
       title: "Vendas",
-      url: "/vendas",
+      url: "/dashboard/vendas",
       icon: IconChartBar,
     },
     {
       title: "Clientes",
-      url: "/clientes",
+      url: "/dashboard/clientes",
       icon: IconFolder,
     },
     {
       title: "Relatórios",
-      url: "/relatorios",
+      url: "/dashboard/relatorios",
       icon: IconUsers,
     },
     {
@@ -61,7 +61,7 @@ const data = {
     },
     {
       title: "Fornecedores",
-      url: "/relatorios",
+      url: "/dashboard/relatorios",
       icon: IconUsers,
     },
     

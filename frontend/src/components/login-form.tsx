@@ -13,24 +13,41 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
   const { register, handleSubmit } = useForm();
+  const [loading, setLoading] = useState<boolean>(false)
+  const router = useRouter()
 
   const handleSub = async (data: any) => {
-    fetch("http://localhost:3333/login", {
+    setLoading(true)
+    await fetch("http://localhost:3333/login", {
       method: "POST",
       body: JSON.stringify(data),
       credentials: 'include',
       headers: {
         "Content-Type": "application/json",
-      }})
-  }
+      }}).then((res) => {
+        return res.json()
+      }).then((resjson) => {
+        console.log(resjson)
+        router.push("/dashboard")
+      })
+      .catch((error) => {
+        console.log(error)
+        alert(`error : ${error}`)
+      })
+      setLoading(false)
+    }
+    
+    if(loading) return <h1>Carregando...</h1>
 
-  return (
+    return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>

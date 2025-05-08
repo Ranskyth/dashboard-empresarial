@@ -9,7 +9,65 @@ generator client {
   output   = "../src/generated/prisma"
 }
 
+enum MetodoPagamento {
+  Pix
+  Debito
+  Credito
+  Dinheiro
+  Boleto
+}
+
+enum Status {
+  Ativo
+  Inativo
+}
+
+enum StatusCompra {
+  Pendente
+  Pago
+  Cancelado
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model Users{
+  id Int @id @unique @default(autoincrement()) 
+  nome String
+  email String @unique
+  avatar String
+
+  @@map("users")
+}
+
+model Products{
+  id Int @id @default(autoincrement())
+  categoria String?
+  preco Decimal
+  estoque Int
+  imagem String
+  status Status @default(Ativo)
+  cores String
+  tamanhos String
+  descricao String?
+
+  @@map("products")
+}
+
+model vendas{
+  id Int @id @default(autoincrement())
+  produto_comprado String
+  valor_total Decimal
+  status StatusCompra @default(Pago)
+  metodo_pagamento MetodoPagamento @default(Pix)
+}
+
+model Cliente {
+  id Int @id @default(autoincrement())
+  nome String
+  email String @unique
+  total_gasto Decimal
+  ultima_compra String
 }
