@@ -3,7 +3,7 @@
 const Clientes = () => {
     
     return(
-        <h1>oiii</h1>
+        <h1>page clientes</h1>
     )
 }
 

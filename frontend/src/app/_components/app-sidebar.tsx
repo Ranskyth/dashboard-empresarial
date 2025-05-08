@@ -54,16 +54,6 @@ const data = {
       url: "/dashboard/relatorios",
       icon: IconUsers,
     },
-    {
-      title: "Funcionarios",
-      url: "/relatorios",
-      icon: IconUsers,
-    },
-    {
-      title: "Fornecedores",
-      url: "/dashboard/relatorios",
-      icon: IconUsers,
-    },
     
   ],
 }

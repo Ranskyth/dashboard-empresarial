@@ -6,8 +6,8 @@ export const verifyJwt = async (req: FastifyRequest, res: FastifyReply) => {
 
     try {
         await req.jwtVerify({})
-    } catch(error){
-        res.status(400).send({error: `error in : ${error}`})
+    } catch (error) {
+        res.status(400).send({ error: `error in : ${error}` })
     }
 }
 
