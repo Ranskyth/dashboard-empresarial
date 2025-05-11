@@ -6,6 +6,22 @@ const secret = new TextEncoder().encode("secret")
 export async function middleware(req: NextRequest) {
 
   const token = req.cookies.get('token')?.value
+
+  if(req.nextUrl.pathname === "/login"){
+    if(token){
+      try{
+        await jwtVerify(token, secret);
+        return NextResponse.redirect(new URL("/dashboard", req.url));
+      }catch{
+        return NextResponse.next()
+      }
+    }
+    return NextResponse.next()
+  }
+
+  if(req.nextUrl.pathname === "/"){
+    return NextResponse.redirect(new URL("/login", req.url))
+  }
   
   if (token) {
     try {
@@ -26,5 +42,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*'],
+  matcher: ['/dashboard/:path*', '/', '/login'],
 };

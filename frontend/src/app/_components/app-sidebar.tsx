@@ -21,12 +21,15 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { usedataUser } from "@/hooks/use-datauser"
+
+
 
 const data = {
   user: {
     name: "shadcn",
     email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+    avatar: "https://github.com/ranskyth.png",
   },
   navMain: [
     {
@@ -58,7 +61,15 @@ const data = {
   ],
 }
 
+interface ITypeDataUser{
+  nome: string; 
+  email: string; 
+  avatar: string; 
+}
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const users = usedataUser() as ITypeDataUser
+    
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -80,7 +91,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={users} />
       </SidebarFooter>
     </Sidebar>
   )

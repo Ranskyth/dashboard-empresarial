@@ -20,7 +20,7 @@ export const loginRouter = (app: FastifyInstance) => {
     })
 
     app.get("/logout", { preHandler: verifyJwt }, (req, res) => {
-        return res.status(200).setCookie('token', 'none', { httpOnly: true, }).send({ mensagem: "logout sucess" })
+        return res.status(200).clearCookie("token").send({ mensagem: "logout sucess" })
 
     })
 }
