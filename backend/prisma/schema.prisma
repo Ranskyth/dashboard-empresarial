@@ -18,6 +18,7 @@ model Users {
 
 model Products {
   id        Int     @id @default(autoincrement())
+  nome      String
   categoria String?
   preco     Decimal
   estoque   Int
