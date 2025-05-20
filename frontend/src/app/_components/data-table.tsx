@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 "use client"
 
 import * as React from "react"
@@ -35,6 +37,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Product } from "@/types/ProductType"
+import { useRouter } from "next/navigation"
 
 
 export const columns: ColumnDef<Product>[] = [
@@ -153,6 +156,7 @@ export const columns: ColumnDef<Product>[] = [
 ]
 
 export function DataTable({data}:{data:Product[]}) {
+  const router = useRouter()
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -191,6 +195,9 @@ export function DataTable({data}:{data:Product[]}) {
           }
           className="max-w-sm"
         />
+        <div className="text-end w-full pr-6">
+        <Button onClick={() => router.push("/dashboard/produtos/new")}>Adicionar Novo Produto</Button>
+        </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
