@@ -10,7 +10,7 @@
 
 **Front-end:** Nextjs, Tailwind, Shadcn/ui
 
-**Back-end:** Nodejs, Fastify, Prisma, Postgres, JWT, Cookies
+**Back-end:** Nodejs, Fastify, Prisma, Postgres
 
 
 **DevOps:** Docker
