@@ -10,7 +10,7 @@ import { userRouter } from "./routers/userRouter";
 const app = fastify()
 
 app.register(fastifyCors, {
-    origin: "http://localhost:3001",
+    origin: "http://localhost:3000",
     credentials: true,
     methods:"*"
 })
@@ -26,4 +26,4 @@ app.register(fastifyJwt,
     }
 )
 
-app.listen({ port: Number(PORT) }, () => console.log(`server on in port ${PORT}`))
+app.listen({ host:"0.0.0.0",port: Number(PORT) }, () => console.log(`server on in port ${PORT}`))
