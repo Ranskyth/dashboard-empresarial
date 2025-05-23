@@ -16,6 +16,18 @@ import { API_BACKEND } from "@/configs/config";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form"
 
+type ProductData = {
+    nome: string,
+    categoria: string,
+    preco: number,
+    estoque: number,
+    status: string,
+    imagem: string,
+    cores: string,
+    tamanhos: string,
+    descricao: string
+}
+
 const InputForm = ({
   nome,
   className,
@@ -38,12 +50,13 @@ const InputForm = ({
 
 export const NewProduct = () => {
 
-    const {register, handleSubmit} = useForm()
+  const {register, handleSubmit} = useForm<ProductData>()
   const router = useRouter();
 
-  const OnSubmit = (data: any) => {
-   
-    fetch(`${API_BACKEND}/products`, {method:"POST", body:JSON.stringify(data), credentials:"include"})
+  const OnSubmit = (data:ProductData) => {
+   (async() => {
+     await fetch(`${API_BACKEND}/products`, {method:"POST",credentials:"include", headers:{"Content-Type":"application/json"}, body:JSON.stringify({...data,estoque:Number(data.estoque), preco:Number(data.preco)})}).then(res => console.log(res.headers)).catch(error => console.log(error))
+   })()
   } 
 
   return (
@@ -65,7 +78,7 @@ export const NewProduct = () => {
               <div className="flex gap-4">
                 <InputForm register={register("imagem")} className="flex-1" nome="Imagem" />
                 <InputForm register={register("cores")} nome="Cores" />
-                <InputForm register={register("tamanho")} nome="Tamanho" />
+                <InputForm register={register("tamanhos")} nome="Tamanho" />
               </div>
               <Textarea {...register("descricao")} className="h-[90%]" placeholder="descrição" />
             </div>

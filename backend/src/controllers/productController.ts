@@ -1,7 +1,19 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { client } from "../prisma/client";
-import { number } from "zod";
+import { number, z } from "zod";
 
+
+const Product = z.object({
+    nome: z.string(),
+    categoria: z.string(),
+    preco:z.number(),
+    estoque:z.number(),
+    status:z.string(),
+    imagem:z.string(),
+    cores:z.string(),
+    tamanhos:z.string(),
+    descricao:z.string()
+})
 
 export const getAllProducts = async (req: FastifyRequest, res: FastifyReply) => {
     try {
@@ -21,13 +33,13 @@ export const getByIdProducts = async (req: FastifyRequest, res: FastifyReply) =>
         return res.status(400).send({ mensagem: "error" })
     }
 }
-//{"nome":"aaaa","categoria":"ssdqwd","preco":"wdwe","estoque":"wewd","status":"ewdw","imagem":"aaaa1","cores":"dfwefdwe","tamanho":"dwedw","descricao":"dwedwed"}
+
 export const createProducts = async (req: FastifyRequest, res: FastifyReply) => {
     try {
-     
-        const {nome,categoria,cores,descricao,tamanho,estoque,imagem,preco,status} = req.body as {nome: string, categoria:string; preco:string, estoque:string, status:string; imagem:string, cores:string, tamanho:string, descricao:string}
 
-        await client.products.create({data:{cores,estoque:Number(estoque),imagem,nome,preco:Number(preco),tamanhos:tamanho,categoria}})
+        const {tamanhos, categoria,cores,descricao,estoque,imagem,nome,preco,status} = Product.parse(req.body)
+
+        await client.products.create({data:{cores, estoque,imagem,nome,preco,tamanhos,categoria,descricao}})
 
         return res.status(201).send({mensagem:"produto cadastrado"})
 

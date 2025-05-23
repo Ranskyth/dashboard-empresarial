@@ -6,12 +6,12 @@ export const loginRouter = (app: FastifyInstance) => {
         const { email, password } = req.body as { email: string, password: string }
 
         if (email == "admin@gmail.com" && password == "1234") {
-            const token = app.jwt.sign({ id: 1, nome: "admin", email: "admin@gmail.com", avatar: "https://github.com/ranskyth.png" })
+            const token = app.jwt.sign({ id: 1 })
             return res.status(200).setCookie('token', token, {
                 httpOnly: true,
                 secure: false,
                 path: "/",
-                sameSite: "strict"
+                sameSite: "none"
 
             }).send({ status: "ok" })
         } else {

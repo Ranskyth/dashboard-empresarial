@@ -12,7 +12,7 @@ const app = fastify()
 app.register(fastifyCors, {
     origin: "http://localhost:3000",
     credentials: true,
-    methods:"*"
+    methods:["GET", "POST","OPTIONS"]
 })
 
 app.register(fastifyCookie)

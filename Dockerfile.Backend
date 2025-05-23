@@ -1,0 +1,4 @@
+from node:21
+
+WORKDIR /app
+

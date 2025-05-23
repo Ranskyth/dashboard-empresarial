@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 "use client"
@@ -23,7 +24,6 @@ import {
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
@@ -38,7 +38,6 @@ import {
 } from "@/components/ui/table"
 import { Product } from "@/types/ProductType"
 import { useRouter } from "next/navigation"
-
 
 export const columns: ColumnDef<Product>[] = [
   {
@@ -125,11 +124,13 @@ export const columns: ColumnDef<Product>[] = [
     cell: ({ row }) => <div className="lowercase">{row.getValue("descricao")}</div>,
   },
   {
+    
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original
+      const roupas = row.original
 
+      const router = useRouter()
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -139,15 +140,10 @@ export const columns: ColumnDef<Product>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(String(payment.id))}
-            >
-              Copy payment ID
-            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => router.push(`/dashboard/produtos/detalhes/${roupas.id}`)}>Detalhes</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => router.push(`/dashboard/produtos/editar/${roupas.id}`)}>Editar</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => router.push(`/dashboard/produtos/deletar/${roupas.id}`)}>Deletar</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )
@@ -156,6 +152,7 @@ export const columns: ColumnDef<Product>[] = [
 ]
 
 export function DataTable({data}:{data:Product[]}) {
+
   const router = useRouter()
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -183,6 +180,8 @@ export function DataTable({data}:{data:Product[]}) {
       rowSelection,
     },
   })
+
+  
 
   return (
     <div className="w-full">
