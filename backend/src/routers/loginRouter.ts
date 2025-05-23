@@ -10,9 +10,7 @@ export const loginRouter = (app: FastifyInstance) => {
             return res.status(200).setCookie('token', token, {
                 httpOnly: true,
                 secure: false,
-                path: "/",
-                sameSite: "none"
-
+                sameSite:"none"
             }).send({ status: "ok" })
         } else {
             return res.status(400).send({ mensagem: "error in login" })

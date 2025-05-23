@@ -25,8 +25,8 @@ export function LoginForm({
   const router = useRouter()
 
   const handleSub = async (data: any) => {
-    setLoading(true)
-    await fetch("http://localhost:3333/login", {
+    try{
+          await fetch("http://localhost:3333/login", {
       method: "POST",
       body: JSON.stringify(data),
       credentials: 'include',
@@ -42,7 +42,11 @@ export function LoginForm({
         console.log(error)
         alert(`error : ${error}`)
       })
+    }catch(error){
+      console.log(error)
+    }finally{
       setLoading(false)
+    }
     }
     
     if(loading) return <h1>Carregando...</h1>

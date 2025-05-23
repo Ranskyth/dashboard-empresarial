@@ -1,4 +1,5 @@
-import { NewProduct } from "@/app/_components/newProduct"
+import { NewProduct } from "@/components/newProduct"
+
 
 const New = () => {
     return(

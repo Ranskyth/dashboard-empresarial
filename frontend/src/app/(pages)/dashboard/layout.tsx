@@ -1,8 +1,6 @@
-'use client'
+import { AppSidebar } from "@/components/navbar/app-sidebar"
 
-import { AppSidebar } from "@/app/_components/app-sidebar"
-
-import { SiteHeader } from "@/app/_components/site-header"
+import { SiteHeader } from "@/components/site-header"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 import { ReactNode } from "react"
 

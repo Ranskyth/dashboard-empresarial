@@ -7,7 +7,7 @@ import { Product } from "@/types/ProductType"
 import { useEffect, useState } from "react"
 
 
-const Produtos = () => {
+const Funcionarios = () => {
 
     const {data} = GetProducts()
 
@@ -20,4 +20,4 @@ const Produtos = () => {
     )
 }
 
-export default Produtos
+export default Funcionarios

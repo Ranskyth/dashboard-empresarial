@@ -40,13 +40,18 @@ export function NavUser({
   }
 }) {
   const router = useRouter()
+  
   const handleLogout = async () => {
-    await fetch("http://localhost:3333/logout",{credentials:"include"})
-    router.push("/login")
+    try{
+      await fetch("http://localhost:3333/logout",{credentials:"include"})
+      router.push("/login")
+    }catch(error){
+      console.log(error)
+    }
   }
 
+  
   const { isMobile } = useSidebar()
-
 
   return (
     <SidebarMenu>

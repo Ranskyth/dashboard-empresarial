@@ -20,7 +20,7 @@ export const getAllProducts = async (req: FastifyRequest, res: FastifyReply) => 
         const db = await client.products.findMany({})
         return res.status(200).send(db)
     } catch (error) {
-        return res.status(401).send({ mensagem: "não autorizado" })
+        return res.status(401).send({ mensagem: error})
     }
 }
 

@@ -195,7 +195,7 @@ export function DataTable({data}:{data:Product[]}) {
           className="max-w-sm"
         />
         <div className="text-end w-full pr-6">
-        <Button onClick={() => router.push("/dashboard/produtos/new")}>Adicionar Novo Produto</Button>
+        <Button onClick={() => router.push("/dashboard/produtos/novoProduto")}>Adicionar Novo Produto</Button>
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

@@ -7,7 +7,7 @@ import { Product } from "@/types/ProductType"
 import { useEffect, useState } from "react"
 
 
-const Produtos = () => {
+const Editar = () => {
 
     const {data} = GetProducts()
 
@@ -15,9 +15,9 @@ const Produtos = () => {
      
     return(
         <div className="px-4">
-           <DataTable data={data}/>
+           <h1>editar</h1>
         </div>
     )
 }
 
-export default Produtos
+export default Editar

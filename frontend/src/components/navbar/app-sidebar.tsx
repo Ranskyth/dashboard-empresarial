@@ -2,16 +2,13 @@
 
 import * as React from "react"
 import {
-  IconChartBar,
-  IconDashboard,
-  IconFolder,
   IconInnerShadowTop,
   IconListDetails,
   IconUsers,
 } from "@tabler/icons-react"
-
-import { NavMain } from "@/app/_components/nav-main"
-import { NavUser } from "@/app/_components/nav-user"
+import { LayoutDashboard } from "lucide-react"
+import { NavMain } from "@/components/navbar/nav-main"
+import { NavUser } from "@/components/navbar/nav-user"
 import {
   Sidebar,
   SidebarContent,
@@ -21,9 +18,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { usedataUser } from "@/hooks/use-datauser"
-
-
+import { usedataUser } from "@/services/getUser"
 
 const data = {
   user: {
@@ -35,7 +30,7 @@ const data = {
     {
       title: "Dashboard",
       url: "/dashboard",
-      icon: IconDashboard,
+      icon: LayoutDashboard,
     },
     {
       title: "Produtos",
@@ -43,21 +38,20 @@ const data = {
       icon: IconListDetails,
     },
     {
-      title: "Vendas",
-      url: "/dashboard/vendas",
-      icon: IconChartBar,
-    },
-    {
-      title: "Clientes",
-      url: "/dashboard/clientes",
-      icon: IconFolder,
-    },
-    {
       title: "Relatórios",
       url: "/dashboard/relatorios",
       icon: IconUsers,
     },
-    
+        {
+      title: "Funcionarios",
+      url: "/dashboard/funcionarios",
+      icon: LayoutDashboard,
+    },
+        {
+      title: "Kanban",
+      url: "/dashboard/relatorios",
+      icon: IconUsers,
+    },
   ],
 }
 
