@@ -6,6 +6,7 @@ import fastifyJwt from "@fastify/jwt";
 import { loginRouter } from "./routers/loginRouter";
 import fastifyCookie from "@fastify/cookie";
 import { userRouter } from "./routers/userRouter";
+import { funcionarioRouter } from "./routers/funcionarioRouter";
 
 const app = fastify()
 
@@ -19,6 +20,7 @@ app.register(fastifyCookie)
 app.register(productRouter)
 app.register(userRouter)
 app.register(loginRouter)
+app.register(funcionarioRouter)
 app.register(fastifyJwt,
     {
         secret: String(SECRET_KEY), cookie:

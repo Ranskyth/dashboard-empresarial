@@ -1,21 +1,19 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 
-import { DataTable } from "@/components/data-table"
-import { GetProducts } from "@/services/getProducts"
-import { Product } from "@/types/ProductType"
-import { useEffect, useState } from "react"
+import { DataTable } from "@/components/_components/data-table"
+import { GetFuncionarios } from "@/services/getFuncionarios"
 
 
 const Funcionarios = () => {
 
-    const {data} = GetProducts()
+    const {data} = GetFuncionarios()
 
     console.log(data)
      
     return(
         <div className="px-4">
-           <DataTable data={data}/>
+           <DataTable ButtonName="Funcionario" data={data}/>
         </div>
     )
 }

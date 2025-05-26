@@ -44,7 +44,7 @@ export const columns: ColumnDef<Product>[] = [
     accessorKey: "imagem",
     header: "Imagem",
     cell: ({ row }) => (
-      <img className="capitalize w-44" src={row.getValue("imagem")} />
+      <img className="capitalize w-44 h-36 object-cover" src={row.getValue("imagem")} />
     ),
   },
   {
@@ -151,7 +151,7 @@ export const columns: ColumnDef<Product>[] = [
   },
 ]
 
-export function DataTable({data}:{data:Product[]}) {
+export function DataTable({data, ButtonName}:{data:Product[], ButtonName?:string}) {
 
   const router = useRouter()
   const [sorting, setSorting] = React.useState<SortingState>([])
@@ -195,7 +195,7 @@ export function DataTable({data}:{data:Product[]}) {
           className="max-w-sm"
         />
         <div className="text-end w-full pr-6">
-        <Button onClick={() => router.push("/dashboard/produtos/novoProduto")}>Adicionar Novo Produto</Button>
+        <Button onClick={() => router.push("/dashboard/produtos/novoProduto")}>Adicionar Novo {ButtonName}</Button>
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -224,7 +224,7 @@ export function DataTable({data}:{data:Product[]}) {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="rounded-md border">
+      <div className="rounded-md overflow-y-auto max-h-[70vh] border">
         <Table>
           <TableHeader className="[&_tr]:border-b bg-muted sticky top-0 z-10">
             {table.getHeaderGroups().map((headerGroup) => (

@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   IconInnerShadowTop,
   IconListDetails,
   IconUsers,
-} from "@tabler/icons-react"
-import { LayoutDashboard } from "lucide-react"
-import { NavMain } from "@/components/navbar/nav-main"
-import { NavUser } from "@/components/navbar/nav-user"
+} from "@tabler/icons-react";
+import { LayoutDashboard } from "lucide-react";
+import { NavMain } from "@/components/navbar/nav-main";
+import { NavUser } from "@/components/navbar/nav-user";
 import {
   Sidebar,
   SidebarContent,
@@ -17,15 +17,11 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
-import { usedataUser } from "@/services/getUser"
+} from "@/components/ui/sidebar";
+import { usedataUser } from "@/services/getUser";
+import { Skeleton } from "../ui/skeleton";
 
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "https://github.com/ranskyth.png",
-  },
   navMain: [
     {
       title: "Dashboard",
@@ -38,32 +34,44 @@ const data = {
       icon: IconListDetails,
     },
     {
-      title: "Relatórios",
-      url: "/dashboard/relatorios",
+      title: "Movimentação",
+      url: "/dashboard/movimentacao",
       icon: IconUsers,
     },
-        {
+    {
       title: "Funcionarios",
       url: "/dashboard/funcionarios",
       icon: LayoutDashboard,
     },
-        {
+    {
       title: "Kanban",
-      url: "/dashboard/relatorios",
+      url: "/dashboard/kanban",
       icon: IconUsers,
     },
+    
+    {
+      title: "Frente de Caixa",
+      url: "/dashboard/frente_caixa",
+      icon: LayoutDashboard,
+    },
   ],
-}
+};
 
-interface ITypeDataUser{
-  nome: string; 
-  email: string; 
-  avatar: string; 
-}
+const Carregamento = () => {
+  return (
+    <div className="flex w-4xl items-center space-x-4">
+      <Skeleton className="h-12 w-12 rounded-full" />
+      <div className="space-y-2">
+        <Skeleton className="h-4 w-[200px]" />
+        <Skeleton className="h-4 w-[160px]" />
+      </div>
+    </div>
+  );
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const users = usedataUser() as ITypeDataUser
-    
+  const { user, loading } = usedataUser();
+
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -75,7 +83,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             >
               <a href="#">
                 <IconInnerShadowTop className="!size-5" />
-                <span className="text-base font-semibold">Dashboard Empresarial</span>
+                <span className="text-base font-semibold">
+                  Dashboard Empresarial
+                </span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -85,8 +95,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={users} />
+        {loading ? (
+          <Carregamento/>
+        ) : (
+          <NavUser user={user} />
+        )}
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }

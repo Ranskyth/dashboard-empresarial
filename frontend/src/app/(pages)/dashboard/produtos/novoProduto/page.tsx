@@ -1,4 +1,5 @@
-import { NewProduct } from "@/components/newProduct"
+import { NewProduct } from "@/components/_components/newProduct"
+
 
 
 const New = () => {

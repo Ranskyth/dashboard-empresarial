@@ -1,24 +1,9 @@
 import { FastifyInstance } from "fastify";
 import { verifyJwt } from "../auth";
+import { Cadastro, Login, Logout } from "../controllers/loginController";
 
 export const loginRouter = (app: FastifyInstance) => {
-    app.post("/login", (req, res) => {
-        const { email, password } = req.body as { email: string, password: string }
-
-        if (email == "admin@gmail.com" && password == "1234") {
-            const token = app.jwt.sign({ id: 1 })
-            return res.status(200).setCookie('token', token, {
-                httpOnly: true,
-                secure: false,
-                sameSite:"none"
-            }).send({ status: "ok" })
-        } else {
-            return res.status(400).send({ mensagem: "error in login" })
-        }
-    })
-
-    app.get("/logout", { preHandler: verifyJwt }, (req, res) => {
-        return res.status(200).clearCookie("token").send({ mensagem: "logout sucess" })
-
-    })
+    app.post("/login", Login)
+    app.post("/cadastro", {preHandler: verifyJwt} ,Cadastro)
+    app.get("/logout", { preHandler: verifyJwt }, Logout)
 }

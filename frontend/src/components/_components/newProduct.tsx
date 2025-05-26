@@ -9,12 +9,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+
 import { Textarea } from "@/components/ui/textarea";
 import { API_BACKEND } from "@/configs/config";
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form"
+import { toast } from "sonner";
 
 type ProductData = {
     nome: string,
@@ -47,6 +49,25 @@ const InputForm = ({
     </div>
   );
 };
+ 
+import * as React from "react"
+ 
+import { Progress } from "@/components/ui/progress"
+import { SelectDemo } from "./categorias";
+import { AddCategoria } from "./add-categoria";
+ 
+export function ProgressDemo({text}:{text?:string}) {
+  const [progress, setProgress] = React.useState(100)
+ 
+  React.useEffect(() => {
+    const timer = setInterval(() => setProgress(prev =>  prev -= 2),15)
+    return () => clearTimeout(timer)
+  }, [])
+ 
+  return <div className="flex flex-col gap-2 w-full"><h1 className="text-[1rem] font-bold">{text}</h1><Progress value={progress} className="w-[100%]"/></div>
+}
+
+
 
 export const NewProduct = () => {
 
@@ -60,8 +81,17 @@ export const NewProduct = () => {
   } 
 
   return (
-    <div className="w-full h-full flex items-center  justify-center">
+    <div className="w-full h-full flex gap-5 items-center flex-col justify-center">
+
+  
       <Card className="w-[90%] h-[85%]">
+        <div className="w-full text-end pr-3">
+
+          <AddCategoria>
+            <Button className="w-80">Adicionar Nova Categoria</Button>
+          </AddCategoria>
+
+        </div>
         <CardHeader>
           <CardTitle>Cradastro de Produtos</CardTitle>
         </CardHeader>
@@ -71,6 +101,7 @@ export const NewProduct = () => {
               <div className="flex gap-4">
                 <InputForm register={register("nome")} className="flex-1/2" nome="nome" />
                 <InputForm register={register("categoria")} nome="Categoria" />
+                <SelectDemo/>
                 <InputForm register={register("preco")} nome="Preco" />
                 <InputForm register={register("estoque")} nome="Estoque" />
                 <InputForm register={register("status")} nome="Status" />
@@ -82,10 +113,17 @@ export const NewProduct = () => {
               </div>
               <Textarea {...register("descricao")} className="h-[90%]" placeholder="descrição" />
             </div>
-                      <Button variant="outline" onClick={() => router.back()}>
+                      <Button onClick={() => router.back()} variant="outline" type="button">
             Cancel
           </Button>
-          <Button type="submit">Cadastrar Produto</Button>
+          <Button type="submit" onClick={() =>
+          
+        toast("",{
+          action: <ProgressDemo text="Cadastrando Produto"/>,
+          duration:1500
+        })
+
+      }>Cadastrar Produto</Button>
           </form>
         </CardContent>
         <CardFooter className="flex justify-between">

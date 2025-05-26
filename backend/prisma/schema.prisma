@@ -8,10 +8,10 @@ datasource db {
 }
 
 model Users {
-  id     Int    @id @unique @default(autoincrement())
-  nome   String
-  email  String @unique
-  avatar String
+  id       Int    @id @unique @default(autoincrement())
+  email    String @unique
+  avatar   String
+  password String
 
   @@map("users")
 }
@@ -20,7 +20,7 @@ model Products {
   id        Int     @id @default(autoincrement())
   nome      String
   categoria String?
-  preco     Decimal
+  preco     Decimal @db.Decimal(9,2)
   estoque   Int
   imagem    String
   status    Status  @default(Ativo)
@@ -31,22 +31,25 @@ model Products {
   @@map("products")
 }
 
-model vendas {
+model Vendas {
   id               Int             @id @default(autoincrement())
   produto_comprado String
   valor_total      Decimal
   status           StatusCompra    @default(Pago)
   metodo_pagamento MetodoPagamento @default(Pix)
+
+  @@map("vendas")
 }
 
-model Clients {
-  id            Int     @id @default(autoincrement())
-  nome          String
-  email         String  @unique
-  total_gasto   Decimal
-  ultima_compra String
+model Funcionarios {
+  id        Int     @id @default(autoincrement())
+  nome      String
+  salario   Decimal
+  nascimeto Int?
+  telefone  String?
+  cpf       String  @unique
 
-  @@map("clients")
+  @@map("funcionarios")
 }
 
 enum MetodoPagamento {
